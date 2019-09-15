@@ -1,6 +1,7 @@
 var altura = 0
 var largura = 0
 var vida = 1
+var tempo = 15
 
 function ajustaTamanhoPalcoJogo() {
     altura = window.innerHeight
@@ -8,6 +9,23 @@ function ajustaTamanhoPalcoJogo() {
 }
 
 ajustaTamanhoPalcoJogo()
+
+document.getElementById('cronometro').innerHTML = tempo
+
+var cronometro = setInterval(function(){
+    tempo -= 1
+
+    //tempo acabou e player sobreviveu
+    if(tempo < 0){
+        clearInterval(cronometro)
+        clearInterval(criaMosquito)
+        alert('You win')
+    }else{
+        document.getElementById('cronometro').innerHTML = tempo
+    }
+
+   
+}, 1000)
 
 //Gerando posições aleatorias com base no tamanho da tela
 function posicaoRandomica() {
@@ -74,6 +92,6 @@ function ladoAleatorio() {
     }
 }
 
-setInterval(function () {
+var criaMosquito = setInterval(function () {
     posicaoRandomica()
 }, 2000)
